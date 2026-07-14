@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico de Instagram | Mater Hotel</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white:      #FFFFFF;
+  --off-white:  #FAFAFA;
+  --light-gray: #F2F0ED;
+  --border:     #E0DBD5;
+  --terra:      #8B5E2E;
+  --terra-btn:  #9B6A34;
+  --dark:       #1A1510;
+  --mid:        #5C524A;
+  --light-text: #9A918A;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--dark);
+  font-family: 'Jost', sans-serif;
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* NAV */
+.nav {
+  background: var(--white);
+  padding: 0 80px;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem;
+  font-weight: 300;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dark);
+}
+.nav-right {
+  font-size: 0.55rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--light-text);
+}
+
+/* HERO DARK - como as seções de foto do site */
+.hero {
+  background: #111;
+  min-height: 88vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 80px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,8,5,0.85) 0%,
+    rgba(10,8,5,0.5) 50%,
+    rgba(10,8,5,0.2) 100%
+  );
+  z-index: 1;
+}
+/* Simulated dark photo texture */
+.hero-photo {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 80% at 70% 30%, rgba(139,94,46,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(80,50,20,0.3) 0%, transparent 50%),
+    linear-gradient(135deg, #1a130a 0%, #2a1e12 40%, #1a1308 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+}
+.hero-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--terra-btn);
+  margin-bottom: 32px;
+  display: block;
+}
+.hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 300;
+  line-height: 1.08;
+  color: #fff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+.hero h1 em {
+  display: block;
+  font-style: italic;
+  text-transform: none;
+  color: rgba(255,255,255,0.65);
+  font-size: 0.78em;
+  letter-spacing: 0.02em;
+  margin-top: 8px;
+}
+.hero-sub {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  max-width: 460px;
+  line-height: 1.85;
+}
+
+/* STATS BAR - like the terracotta reserve bar */
+.stats-bar {
+  background: var(--terra);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.stat {
+  padding: 28px 36px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  text-align: center;
+}
+.stat:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.2rem;
+  font-weight: 300;
+  color: #fff;
+  display: block;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 6px;
+  display: block;
+}
+
+/* SECTION WHITE */
+.section {
+  padding: 100px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* EYEBROW like site */
+.eyebrow {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+.section-title em {
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0.02em;
+  color: var(--terra);
+}
+
+.section-body {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.9;
+  max-width: 560px;
+}
+
+/* INTRO GRID */
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+  padding: 80px 0;
+  border-bottom: 1px solid var(--border);
+}
+.intro-right p {
+  font-size: 0.82rem;
+  color: var(--mid);
+  line-height: 1.9;
+}
+.intro-right p + p { margin-top: 18px; }
+
+/* FINDINGS - card style like site */
+.findings-wrap {
+  padding: 80px 80px 100px;
+  background: var(--off-white);
+}
+.findings-header {
+  max-width: 1200px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+.findings-header .section-title { margin: 0 auto 16px; }
+.findings-header .section-body { margin: 0 auto; text-align: left; max-width: 600px; }
+
+.cards-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.card {
+  background: var(--white);
+  padding: 40px 32px;
+  border-radius: 8px;
+  position: relative;
+  border: 1px solid var(--border);
+}
+.card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: var(--light-gray);
+  line-height: 1;
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}
+.card-tag {
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 14px;
+  display: block;
+}
+.card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--dark);
+  margin-bottom: 12px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+.card p {
+  font-size: 0.76rem;
+  color: var(--mid);
+  line-height: 1.85;
+}
+.card-pill {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 0.5rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border: 1px solid var(--terra);
+  color: var(--terra);
+}
+
+/* DARK PHOTO SECTION - like "O melhor começo" */
+.dark-section {
+  background: #1a1208;
+  padding: 100px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.dark-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(139,94,46,0.2) 0%, transparent 65%);
+  pointer-events: none;
+}
+.dark-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.dark-section .eyebrow { color: rgba(185,140,80,0.8); text-align: center; }
+.dark-section .section-title { color: #fff; letter-spacing: 0.06em; margin: 0 auto 20px; }
+.dark-section .section-title em { color: rgba(185,140,80,0.8); }
+
+.data-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 56px 0;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.data-box {
+  padding: 48px 44px;
+  text-align: left;
+  background: rgba(255,255,255,0.03);
+  border-right: 1px solid rgba(255,255,255,0.06);
+}
+.data-box:last-child { border-right: none; }
+.db-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: rgba(185,140,80,0.9);
+  display: block;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.db-label {
+  font-size: 0.52rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 14px;
+  display: block;
+}
+.db-desc {
+  font-size: 0.76rem;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.85;
+}
+
+.quote-block {
+  border: 1px solid rgba(185,140,80,0.2);
+  padding: 40px 48px;
+  margin: 48px 0 0;
+  text-align: left;
+}
+.quote-block p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 300;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+/* PROPOSAL */
+.proposal-wrap {
+  padding: 100px 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.proposal-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 64px;
+  align-items: start;
+}
+.p-list {}
+.p-item {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 28px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+.p-item:first-child { border-top: 1px solid var(--border); }
+.p-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--border);
+  line-height: 1;
+  padding-top: 4px;
+}
+.p-body strong {
+  display: block;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dark);
+  margin-bottom: 8px;
+}
+.p-body p {
+  font-size: 0.76rem;
+  color: var(--mid);
+  line-height: 1.9;
+}
+
+/* CTA - like the dark photo sections */
+.cta {
+  background: var(--light-gray);
+  padding: 100px 80px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.cta-inner { max-width: 560px; margin: 0 auto; }
+.cta .section-title { font-size: clamp(1.5rem, 2.8vw, 2.2rem); margin-bottom: 20px; }
+.cta-body {
+  font-size: 0.8rem;
+  color: var(--mid);
+  line-height: 1.9;
+  margin-bottom: 44px;
+}
+/* Button style exactly like site: outlined terracotta */
+.cta-btn {
+  display: inline-block;
+  border: 1px solid var(--terra-btn);
+  color: var(--terra-btn);
+  font-family: 'Jost', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  padding: 16px 48px;
+  text-decoration: none;
+  transition: all 0.25s;
+  background: transparent;
+}
+.cta-btn:hover {
+  background: var(--terra-btn);
+  color: #fff;
+}
+.cta-note {
+  margin-top: 20px;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--light-text);
+}
+
+/* FOOTER */
+footer {
+  background: var(--dark);
+  padding: 32px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.f-l {
+  font-size: 0.55rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+}
+.f-l span { color: rgba(185,140,80,0.7); }
+.f-r {
+  font-size: 0.52rem;
+  color: rgba(255,255,255,0.15);
+  letter-spacing: 0.1em;
+}
+
+@media (max-width: 900px) {
+  .nav { padding: 0 24px; }
+  .hero { padding: 48px 24px 56px; min-height: 70vh; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .stat { border-bottom: 1px solid rgba(255,255,255,0.1); }
+  .section { padding: 60px 24px; }
+  .intro-grid { grid-template-columns: 1fr; gap: 36px; padding: 56px 0; }
+  .findings-wrap { padding: 60px 24px; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .dark-section { padding: 72px 24px; }
+  .data-row { grid-template-columns: 1fr; }
+  .proposal-wrap { padding: 60px 24px; }
+  .proposal-header { grid-template-columns: 1fr; gap: 28px; }
+  .cta { padding: 72px 24px; }
+  footer { padding: 24px; flex-direction: column; gap: 8px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Mater Hotel</div>
+  <div class="nav-right">Diagnóstico · Instagram · 2025</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-label">Diagnóstico Gratuito · Instagram</span>
+    <h1>
+      Muito mais que<br>um perfil.
+      <em>Mas ainda longe do teto.</em>
+    </h1>
+    <p class="hero-sub">
+      29 mil seguidores, identidade visual forte, Reels com até 79 mil visualizações.
+      O Mater Hotel tem ativos reais no Instagram.
+      Esta análise mostra o que falta para transformar presença em reservas consistentes.
+    </p>
+  </div>
+</section>
+
+<!-- STATS BAR - terracotta like site -->
+<div class="stats-bar">
+  <div class="stat">
+    <span class="stat-val">29k</span>
+    <span class="stat-label">Seguidores</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">79k</span>
+    <span class="stat-label">Views no melhor Reel</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">550+</span>
+    <span class="stat-label">Curtidas no post de história</span>
+  </div>
+  <div class="stat">
+    <span class="stat-val">0</span>
+    <span class="stat-label">Hashtags nos posts analisados</span>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div style="max-width:1200px;margin:0 auto;padding:0 80px;">
+  <div class="intro-grid">
+    <div>
+      <span class="eyebrow">Contexto</span>
+      <h2 class="section-title">O perfil mais<br><em>maduro analisado</em></h2>
+      <div style="width:40px;height:1px;background:var(--terra);margin:24px 0 0;"></div>
+    </div>
+    <div class="intro-right">
+      <p>O Mater Hotel não é um perfil abandonado. São 387 publicações, bio com personalidade própria, destaques bem organizados que cobrem toda a jornada de decisão do hóspede e uma identidade visual consistente e reconhecível.</p>
+      <p>O problema aqui é diferente dos outros hotéis. Não é falta de cuidado com o perfil. É que o conteúdo do dia a dia não está aproveitando o maior diferencial que o hotel tem: a história e a alma do lugar.</p>
+      <p>O post de storytelling sobre o prédio histórico gerou 550 curtidas. Os posts recentes com legendas genéricas ficam em 40 a 80. A audiência já mostrou o que responde.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FINDINGS -->
+<div class="findings-wrap">
+  <div class="findings-header">
+    <span class="eyebrow" style="text-align:center;display:block;">O que foi encontrado</span>
+    <h2 class="section-title" style="text-align:center;">Seis pontos que limitam<br><em>o resultado</em></h2>
+    <p class="section-body" style="text-align:center;margin:0 auto;">
+      O Mater Hotel tem uma base sólida. Os pontos abaixo são as alavancas que faltam para transformar um bom perfil em canal de reservas previsível.
+    </p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <span class="card-num">01</span>
+      <span class="card-tag">Conteúdo</span>
+      <h3>Legendas que não usam a história do hotel</h3>
+      <p>Posts recentes com "O melhor momento do dia" não usam nada que diferencia o Mater de qualquer outro hotel. O post de storytelling histórico provou que narrativa profunda converte muito mais.</p>
+      <span class="card-pill">Oportunidade perdida</span>
+    </div>
+    <div class="card">
+      <span class="card-num">02</span>
+      <span class="card-tag">Alcance</span>
+      <h3>Sem hashtags o perfil fala só para quem já segue</h3>
+      <p>Nenhum dos posts analisados tinha hashtags. O conteúdo não aparece para quem pesquisa Canela, Serra Gaúcha ou hotel design. Com 29 mil seguidores, o alcance poderia ser muito maior.</p>
+      <span class="card-pill">Correção imediata</span>
+    </div>
+    <div class="card">
+      <span class="card-num">03</span>
+      <span class="card-tag">Reels</span>
+      <h3>Picos virais sem padrão repetível identificado</h3>
+      <p>31k, 37k, 45k e 79k visualizações mostram que o formato funciona. Mas a maioria dos Reels fica em 1k a 4k. O que fez os virais performarem acima ainda não virou estratégia.</p>
+      <span class="card-pill">Alto potencial</span>
+    </div>
+    <div class="card">
+      <span class="card-num">04</span>
+      <span class="card-tag">Relacionamento</span>
+      <h3>Comentários afetivos sem resposta do hotel</h3>
+      <p>A audiência comenta com emoção, conta memórias, faz perguntas. Nenhum desses comentários recebe resposta. Cada interação ignorada é uma prova social desperdiçada.</p>
+      <span class="card-pill">Alta prioridade</span>
+    </div>
+    <div class="card">
+      <span class="card-num">05</span>
+      <span class="card-tag">Engajamento</span>
+      <h3>0,15% a 0,3% de taxa para 29 mil seguidores</h3>
+      <p>40 a 80 curtidas por post em uma base de 29 mil está abaixo do esperado. O problema não é falta de qualidade visual. É que o conteúdo genérico não gera a mesma reação que o storytelling gera.</p>
+      <span class="card-pill">Prioridade</span>
+    </div>
+    <div class="card">
+      <span class="card-num">06</span>
+      <span class="card-tag">Conversão</span>
+      <h3>Nenhum caminho claro para reserva no conteúdo</h3>
+      <p>O feed tem qualidade estética e identidade forte. Mas os posts raramente direcionam para reservar. Um seguidor que se encanta com o Mater precisa de um próximo passo claro.</p>
+      <span class="card-pill">Ajuste necessário</span>
+    </div>
+  </div>
+</div>
+
+<!-- DARK SECTION -->
+<div class="dark-section">
+  <div class="dark-inner">
+    <span class="eyebrow">Os números que provam</span>
+    <h2 class="section-title">A audiência já mostrou<br><em>o que responde</em></h2>
+
+    <div class="data-row">
+      <div class="data-box">
+        <span class="db-val">550+</span>
+        <span class="db-label">Curtidas no post de storytelling histórico</span>
+        <p class="db-desc">Um "pequeno documentário" sobre o prédio gerou comentários emocionados e dezenas de interações detalhadas. É o post com mais engajamento da história do perfil.</p>
+      </div>
+      <div class="data-box">
+        <span class="db-val">40–80</span>
+        <span class="db-label">Curtidas nos posts recentes com legendas genéricas</span>
+        <p class="db-desc">Posts com "O melhor momento do dia" têm sete vezes menos engajamento que o post de storytelling. A diferença está no conteúdo, não na audiência.</p>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"A história do Mater Hotel é o maior diferencial competitivo que existe. Um prédio histórico ressignificado, araucárias que viraram decoração, art déco encontrando o contemporâneo. Isso não aparece nas legendas do dia a dia."</p>
+    </div>
+  </div>
+</div>
+
+<!-- PROPOSAL -->
+<div class="proposal-wrap">
+  <div class="proposal-header">
+    <div>
+      <span class="eyebrow">O que propomos</span>
+      <h2 class="section-title">Como tornar o bom<br><em>em consistente</em></h2>
+      <div style="width:40px;height:1px;background:var(--terra);margin-top:24px;"></div>
+    </div>
+    <div class="section-body" style="padding-top:8px;">
+      O Mater Hotel não precisa reconstruir nada. Precisa aprofundar o que já funciona e corrigir o que está limitando o alcance. Cada ponto abaixo tem impacto direto no engajamento e na conversão.
+    </div>
+  </div>
+
+  <div class="p-list">
+    <div class="p-item">
+      <span class="p-n">01</span>
+      <div class="p-body">
+        <strong>Storytelling no dia a dia, não só em datas especiais</strong>
+        <p>Cada post tem uma história possível. A araucária que virou decoração, o hóspede que voltou pela quarta vez, o barista que escolheu os grãos. Legendas curtas e genéricas desperdiçam o maior ativo do hotel.</p>
+      </div>
+    </div>
+    <div class="p-item">
+      <span class="p-n">02</span>
+      <div class="p-body">
+        <strong>Hashtags estratégicas em todos os posts</strong>
+        <p>Problema simples com impacto direto no alcance. Hashtags bem escolhidas fazem o conteúdo aparecer para quem pesquisa onde se hospedar em Canela e Gramado.</p>
+      </div>
+    </div>
+    <div class="p-item">
+      <span class="p-n">03</span>
+      <div class="p-body">
+        <strong>Identificar e replicar a fórmula dos Reels virais</strong>
+        <p>Os vídeos com 31k, 45k e 79k visualizações têm algo em comum. Identificar esse padrão e aplicá-lo sistematicamente transforma picos isolados em consistência de alcance.</p>
+      </div>
+    </div>
+    <div class="p-item">
+      <span class="p-n">04</span>
+      <div class="p-body">
+        <strong>Responder todos os comentários ativamente</strong>
+        <p>A audiência do Mater é emocionalmente engajada. Comentários com memórias e elogios são prova social poderosa. Uma resposta do hotel amplifica isso e sinaliza ao algoritmo que o perfil é ativo.</p>
+      </div>
+    </div>
+    <div class="p-item">
+      <span class="p-n">05</span>
+      <div class="p-body">
+        <strong>CTA claro ao final de cada post</strong>
+        <p>Cada post que encanta sem direcionar é uma oportunidade perdida. Uma chamada direta para reserva, sem agressividade, transforma admiração em ação.</p>
+      </div>
+    </div>
+    <div class="p-item">
+      <span class="p-n">06</span>
+      <div class="p-body">
+        <strong>Tráfego pago com criativos de storytelling</strong>
+        <p>Com 29 mil seguidores e conteúdo de alta qualidade já produzido, campanhas no Meta Ads segmentadas para viajantes da Serra Gaúcha têm potencial de retorno expressivo e previsível.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-inner">
+    <span class="eyebrow" style="text-align:center;display:block;">Próximo passo</span>
+    <h2 class="section-title">Agende uma conversa<br><em>gratuita com Pedro</em></h2>
+    <p class="cta-body">
+      20 a 30 minutos para entender como funciona o trabalho, tirar dúvidas
+      e ver se faz sentido para o Mater Hotel. Sem custo, sem compromisso.
+    </p>
+    <a href="https://wa.me/5555991011436" class="cta-btn">Agendar conversa gratuita</a>
+    <p class="cta-note">20 a 30 minutos · 100% gratuito · Sem compromisso</p>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-l">Diagnóstico preparado por <span>Pedro Munareto</span> · Gestor de Instagram e Tráfego Pago</div>
+  <div class="f-r">Material elaborado exclusivamente para o Mater Hotel · Canela RS</div>
+</footer>
+
+</body>
+</html>
